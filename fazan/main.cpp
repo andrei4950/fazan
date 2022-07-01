@@ -99,6 +99,11 @@ bool is_game_over(int first_player_score, int second_player_score)
 
 bool is_round_over(string last_word, string second_to_last_word)
 {
+    if(are_words_linked(second_to_last_word, last_word) && is_real(last_word) && !(is_used(last_word)))
+    {
+        add_used_word(last_word);
+        return 0;
+    }
     return 1;
 }
 
