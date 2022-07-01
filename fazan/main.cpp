@@ -35,7 +35,10 @@ bool is_used(string word)
     for(int i=0; i<len; i++)
     {
         if(word == used_words[i])
+        {
             ok = 1;
+            break;
+        }
     }
     return ok;
 }
@@ -63,10 +66,13 @@ bool is_real(string word)
     unsigned long len = all_words.size();
     bool ok = 0;
     
-    for(int i=0; i<len; i++)
+    for(int i=0; i<len; i++)            //future improvents: binary search
     {
         if(word == all_words[i])
+        {
             ok = 1;
+            break;
+        }
     }
     return ok;
 }
@@ -105,11 +111,10 @@ bool is_game_over(int first_player_score, int second_player_score)
 bool is_round_over(string last_word, string second_to_last_word)
 {
     bool ok=1;
+    
     if(are_words_linked(second_to_last_word, last_word) && is_real(last_word) && !(is_used(last_word)))
-    {
-        add_used_word(last_word);
-            ok=0;
-    }
+        ok = 0;
+    
     return ok;
 }
 
@@ -136,7 +141,7 @@ void run_game()
 
 int main()
 {
-    get_all_words();
+    
     return 0;
 }
 
