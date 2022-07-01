@@ -66,7 +66,7 @@ bool is_real(string word)
     unsigned long len = all_words.size();
     bool ok = 0;
     
-    for(int i=0; i<len; i++)            //future improvents: binary search
+    for(int i=0; i<len; i++)            //future improvements: binary search
     {
         if(word == all_words[i])
         {
