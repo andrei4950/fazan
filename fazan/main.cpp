@@ -7,9 +7,10 @@ using namespace std;
 
 bool are_words_linked(string word1, string word2)
 {
-    if(word1[0]==word2[word2.size()-2] && word1[1]==word2[word2.size()-1])
-        return 1;
-    return 0;
+    int second_to_last_letter = word2.size() - 2, last_letter = word2.size() - 1;
+    bool are_linked = word1[0] == word2[second_to_last_letter] && word1[1] == word2[last_letter];
+
+    return are_linked;
 }
 
 void add_used_word(string word)
@@ -29,12 +30,17 @@ bool is_used(string word)
 {
     vector<string> used_words = get_used_words();
     unsigned long len = used_words.size();
+    bool ok = 0;
+    
     for(int i=0; i<len; i++)
     {
         if(word == used_words[i])
-            return 1;
+        {
+            ok = 1;
+            break;
+        }
     }
-    return 0;
+    return ok;
 }
 
 vector<string> get_all_words()
@@ -58,12 +64,17 @@ bool is_real(string word)
 {
     vector<string> all_words = get_all_words();
     unsigned long len = all_words.size();
-    for(int i=0; i<len; i++)
+    bool ok = 0;
+    
+    for(int i=0; i<len; i++)            //future improvents: binary search
     {
         if(word == all_words[i])
-            return 1;
+        {
+            ok = 1;
+            break;
+        }
     }
-    return 0;
+    return ok;
 }
 
 void display_response(string word)
@@ -99,7 +110,12 @@ bool is_game_over(int first_player_score, int second_player_score)
 
 bool is_round_over(string last_word, string second_to_last_word)
 {
-    return 1;
+    bool ok=1;
+    
+    if(are_words_linked(second_to_last_word, last_word) && is_real(last_word) && !(is_used(last_word)))
+        ok = 0;
+    
+    return ok;
 }
 
 void run_game()
@@ -125,7 +141,7 @@ void run_game()
 
 int main()
 {
-    get_all_words();
+    
     return 0;
 }
 
