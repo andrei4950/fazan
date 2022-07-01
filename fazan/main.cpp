@@ -77,7 +77,7 @@ void display_player_response(string word, bool is_player_one_turn)
 
 void display_round_over(int score1, int score2)
 {
-    cout << "TURN OVER!" << endl;
+    cout << "ROUND OVER!" << endl;
     cout << "First player score is  " << score1 << endl;
     cout << "Second player score is " << score2 << endl;
 }
