@@ -118,39 +118,7 @@ bool is_game_over(int player1_score, int player2_score)
 
 bool is_round_over(string last_word, string second_to_last_word)
 {
-    bool ok=1;
-    
-    if(are_words_linked(second_to_last_word, last_word) && is_real(last_word) && !(is_used(last_word)))
-        ok = 0;
-    
-    return ok;
-}
-
-void first_turn(bool &is_player_one_turn, string &last_word, string &second_to_last_word, int &player1_score, int &player2_score)
-{
-    char starting_letter = 'A' + (rand() % 26);
-    last_word[0] = starting_letter;
-    
-    if(is_player_one_turn)
-    {
-        second_to_last_word = last_word;
-        last_word = bot1(last_word);
-    }
-    else
-    {
-        second_to_last_word = last_word;
-        last_word = bot2(last_word);
-    }
-    
-    if(is_round_over(last_word, second_to_last_word))
-    {
-        if(is_player_one_turn)
-            player1_score++;
-        else
-            player2_score++;
-    }
-    
-    is_player_one_turn = !is_player_one_turn;
+    return !(are_words_linked(second_to_last_word, last_word)) || !(is_real(last_word)) || is_used(last_word);
 }
 
 void run_game()
@@ -166,12 +134,45 @@ void run_game()
     
     while(!is_game_over(player1_score, player2_score))
     {
-        first_turn(is_player_one_turn, last_word, second_to_last_word, player1_score, player2_score);
+        int word_number = 0;
+        char starting_letter = 'A' + (rand() % 26);
+        last_word[0] = starting_letter;
         
         while(!is_round_over(last_word, second_to_last_word))
         {
+            if(is_player_one_turn)
+            {
+                second_to_last_word = last_word;
+                last_word = bot1(last_word);
+            }
+            else
+            {
+                second_to_last_word = last_word;
+                last_word = bot2(last_word);
+            }
             
+            display_player_response(last_word, is_player_one_turn);
+            
+            word_number++;
+            is_player_one_turn = !is_player_one_turn;
         }
+        
+        if(word_number == 2)
+        {
+            if(is_player_one_turn)
+                player2_score++;
+            else
+                player1_score++;
+        }
+        else
+        {
+            if(is_player_one_turn)
+                player1_score++;
+            else
+                player2_score++;
+        }
+        
+        display_round_over(player1_score, player2_score);
     }
 }
 
