@@ -29,12 +29,10 @@ string get_file_content(string filename)
         string line;
         while(getline(file, line))
         {
-            cout<<"line: "<<line<<endl;
             content.append(line);
             content.append(" ");
         }
         file.close();
-        cout<<"content: "<<content<<endl;
     }
     else
     {
@@ -42,6 +40,29 @@ string get_file_content(string filename)
         content = "";
     }
     return content;
+}
+
+vector<string> get_file_content_vector(string filename)
+{
+    vector<string> content_vector = {};
+    string content_string = get_file_content(filename);
+    string word = "";
+    for (unsigned i=0; i<content_string.length(); ++i)
+    {
+        if(content_string.at(i) == ' ')
+        {
+            if(word != "")
+            {
+                content_vector.push_back(word);
+                word = "";
+            }
+        }
+        else
+        {
+            word += content_string.at(i);
+        }
+    }
+    return content_vector;
 }
 
 vector<string> get_used_words()
