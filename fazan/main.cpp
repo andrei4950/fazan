@@ -110,7 +110,7 @@ void setup_game(int &first_player_score, int &second_player_score, string &last_
 
 bool is_game_over(int first_player_score, int second_player_score)
 {
-    return 1;
+    return first_player_score>=5 || second_player_score>=5;
 }
 
 bool is_round_over(string last_word, string second_to_last_word)
