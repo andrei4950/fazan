@@ -103,14 +103,17 @@ string bot2(string last_letters)
     return 0;
 }
 
-void setup_game(int &first_player_score, int &second_player_score, string &last_word, string &second_to_last_word)
+void setup_game(int &player1_score, int &player2_score, string &last_word, string &second_to_last_word)
 {
-    
+    player1_score = 0;
+    player2_score = 0;
+    last_word = "";
+    second_to_last_word = "";
 }
 
-bool is_game_over(int first_player_score, int second_player_score)
+bool is_game_over(int player1_score, int player2_score)
 {
-    return first_player_score>=5 || second_player_score>=5;
+    return player1_score>=5 || player2_score>=5;
 }
 
 bool is_round_over(string last_word, string second_to_last_word)
@@ -123,24 +126,52 @@ bool is_round_over(string last_word, string second_to_last_word)
     return ok;
 }
 
+void first_turn(bool &is_player_one_turn, string &last_word, string &second_to_last_word, int &player1_score, int &player2_score)
+{
+    char starting_letter = 'A' + (rand() % 26);
+    last_word[0] = starting_letter;
+    
+    if(is_player_one_turn)
+    {
+        second_to_last_word = last_word;
+        last_word = bot1(last_word);
+    }
+    else
+    {
+        second_to_last_word = last_word;
+        last_word = bot2(last_word);
+    }
+    
+    if(is_round_over(last_word, second_to_last_word))
+    {
+        if(is_player_one_turn)
+            player1_score++;
+        else
+            player2_score++;
+    }
+    
+    is_player_one_turn = !is_player_one_turn;
+}
+
 void run_game()
 {
-    int first_player_score;
-    int second_player_score;
+    int player1_score;
+    int player2_score;
     string last_word;
     string second_to_last_word;
     bool is_player_one_starting = rand() % 2;
     bool is_player_one_turn = is_player_one_starting;
 
-    setup_game(first_player_score, second_player_score, last_word, second_to_last_word);
+    setup_game(player1_score, player2_score, last_word, second_to_last_word);
     
-    while(!is_game_over(first_player_score, second_player_score))
+    while(!is_game_over(player1_score, player2_score))
     {
+        first_turn(is_player_one_turn, last_word, second_to_last_word, player1_score, player2_score);
+        
         while(!is_round_over(last_word, second_to_last_word))
         {
             
         }
-        is_player_one_turn = !is_player_one_turn;
     }
 }
 
