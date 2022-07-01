@@ -66,14 +66,19 @@ bool is_real(string word)
     return 0;
 }
 
-void display_response(string word)
+void display_player_response(string word, bool is_player_one_turn)
 {
-    
+    if(is_player_one_turn)
+        cout<<"First player's response:  ";
+    else
+        cout<<"Second player's response: ";
+    cout<<word<<endl;
 }
 
-void display_turnover(int score1, int score2)
+void display_round_over(int score1, int score2)
 {
-    cout << "First player score is " << score1 << endl;
+    cout << "TURN OVER!" << endl;
+    cout << "First player score is  " << score1 << endl;
     cout << "Second player score is " << score2 << endl;
 }
 
