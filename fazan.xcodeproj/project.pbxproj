@@ -25,6 +25,8 @@
 /* Begin PBXFileReference section */
 		E1C6ED54286C7E1900119241 /* fazan */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fazan; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C6ED57286C7E1900119241 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E1C6ED60286CC7B800119241 /* list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = list.txt; sourceTree = "<group>"; };
+		E1C6ED61286CC85D00119241 /* used_words.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = used_words.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				E1C6ED57286C7E1900119241 /* main.cpp */,
+				E1C6ED60286CC7B800119241 /* list.txt */,
+				E1C6ED61286CC85D00119241 /* used_words.txt */,
 			);
 			path = fazan;
 			sourceTree = "<group>";
