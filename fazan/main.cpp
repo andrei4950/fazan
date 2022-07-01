@@ -19,6 +19,31 @@ void add_used_word(string word)
     used_words.close();
 }
 
+string get_file_content(string filename)
+{
+    ifstream file;
+    file.open(filename);
+    string content;
+    if ( file.is_open() )
+    {
+        string line;
+        while(getline(file, line))
+        {
+            cout<<"line: "<<line<<endl;
+            content.append(line);
+            content.append(" ");
+        }
+        file.close();
+        cout<<"content: "<<content<<endl;
+    }
+    else
+    {
+        cout<<"ERROR! File not found. "<<endl;
+        content = "";
+    }
+    return content;
+}
+
 vector<string> get_used_words()
 {
     vector<string> used_words = {"test"};
