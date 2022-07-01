@@ -7,9 +7,24 @@ using namespace std;
 
 bool are_words_linked(string word1, string word2)
 {
-    int second_to_last_letter = word2.size() - 2, last_letter = word2.size() - 1;
-    bool are_linked = word1[0] == word2[second_to_last_letter] && word1[1] == word2[last_letter];
-
+    transform(word1.begin(), word1.end(), word1.begin(), :: toupper);
+    transform(word2.begin(), word2.end(), word2.begin(), :: toupper);
+    
+    bool are_linked;
+    if(word1.size() > 1 && word2.size() > 1)
+    {
+        are_linked = word2[0] == word1[word1.size()-2] && word2[1] == word1[word1.size()-1];
+    }
+    else
+    {
+        if(word1.size() == 0 || word2.size() < 2)
+            are_linked = 0;
+        else
+            if(word1.size() == 1)
+                are_linked = word1[0] == word2[0];
+            else
+                are_linked = 0;
+    }
     return are_linked;
 }
 
@@ -73,6 +88,7 @@ vector<string> get_used_words()
 
 bool is_used(string word)
 {
+    transform(word.begin(), word.end(), word.begin(), :: toupper);
     vector<string> used_words = get_used_words();
     unsigned long len = used_words.size();
     bool ok = 0;
@@ -95,6 +111,7 @@ vector<string> get_all_words()
 
 bool is_real(string word)
 {
+    transform(word.begin(), word.end(), word.begin(), :: toupper);
     vector<string> all_words = get_all_words();
     unsigned long len = all_words.size();
     bool ok = 0;
