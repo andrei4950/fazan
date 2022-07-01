@@ -67,8 +67,7 @@ vector<string> get_file_content_vector(string filename)
 
 vector<string> get_used_words()
 {
-    vector<string> used_words = {"test"};
-    return used_words;
+    return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/used_words.txt");
 }
 
 bool is_used(string word)
@@ -85,19 +84,7 @@ bool is_used(string word)
 
 vector<string> get_all_words()
 {
-    vector<string> all_words = {"test"};
-    
-    ifstream dictionary;
-    dictionary.open("/Users/andynic/c++ projects/fazan/fazan/list.txt");
-    string content;
-    if ( dictionary.is_open() )
-    {
-        dictionary >> content;
-        cout << content;
-    }
-    dictionary.close();
-    
-    return all_words;
+    return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/list.txt");
 }
 
 bool is_real(string word)
