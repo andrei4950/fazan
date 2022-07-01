@@ -13,8 +13,7 @@ bool are_words_linked(string word1, string word2)
     bool are_linked;
     if(word1.size() > 1 && word2.size() > 1)
     {
-        int second_to_last_letter = word2.size() - 2, last_letter = word2.size() - 1;
-        are_linked = word2[0] == word1[second_to_last_letter] && word2[1] == word1[last_letter];
+        are_linked = word2[0] == word1[word1.size()-2] && word2[1] == word1[word1.size()-1];
     }
     else
     {
