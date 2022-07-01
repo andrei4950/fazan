@@ -20,10 +20,55 @@ void add_used_word(string word)
     used_words.close();
 }
 
+string get_file_content(string filename)
+{
+    ifstream file;
+    file.open(filename);
+    string content;
+    if ( file.is_open() )
+    {
+        string line;
+        while(getline(file, line))
+        {
+            content.append(line);
+            content.append(" ");
+        }
+        file.close();
+    }
+    else
+    {
+        cout<<"ERROR! File not found. "<<endl;
+        content = "";
+    }
+    return content;
+}
+
+vector<string> get_file_content_vector(string filename)
+{
+    vector<string> content_vector = {};
+    string content_string = get_file_content(filename);
+    string word = "";
+    for (unsigned i=0; i<content_string.length(); ++i)
+    {
+        if(content_string.at(i) == ' ')
+        {
+            if(word != "")
+            {
+                content_vector.push_back(word);
+                word = "";
+            }
+        }
+        else
+        {
+            word += content_string.at(i);
+        }
+    }
+    return content_vector;
+}
+
 vector<string> get_used_words()
 {
-    vector<string> used_words = {"test"};
-    return used_words;
+    return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/used_words.txt");
 }
 
 bool is_used(string word)
@@ -45,19 +90,7 @@ bool is_used(string word)
 
 vector<string> get_all_words()
 {
-    vector<string> all_words = {"test"};
-    
-    ifstream dictionary;
-    dictionary.open("/Users/andynic/c++ projects/fazan/fazan/list.txt");
-    string content;
-    if ( dictionary.is_open() )
-    {
-        dictionary >> content;
-        cout << content;
-    }
-    dictionary.close();
-    
-    return all_words;
+    return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/list.txt");
 }
 
 bool is_real(string word)
@@ -93,14 +126,34 @@ void display_round_over(int score1, int score2)
     cout << "Second player score is " << score2 << endl;
 }
 
-string bot1(string last_letters)
+string bot1(string last_word)
 {
     return 0;
 }
 
-string bot2(string last_letters)
+string bot2(string last_word)
 {
     return 0;
+}
+
+string get_response(string last_word)
+{
+    string response;
+    cout << "Other player said " << last_word << endl;
+    cout << "Your response: ";
+    cin >> response;
+    return response;
+}
+
+string human_player(string last_word)
+{
+    string response = get_response(last_word);
+    while ((!is_real(response) || !are_words_linked(last_word, response)) && response != "")
+    {
+        cout << "That word is not real or not linked! Try again, or leave empty. " << endl;
+        response = get_response(last_word);
+    }
+    return response;
 }
 
 void setup_game(int &player1_score, int &player2_score, string &last_word, string &second_to_last_word)
