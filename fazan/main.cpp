@@ -8,11 +8,9 @@ using namespace std;
 bool are_words_linked(string word1, string word2)
 {
     int second_to_last_letter = word2.size() - 2, last_letter = word2.size() - 1;
-    bool ok = 0;
-    
-    if(word1[0] == word2[second_to_last_letter] && word1[1] == word2[last_letter])
-        ok = 1;
-    return ok;
+    bool are_linked = word1[0] == word2[second_to_last_letter] && word1[1] == word2[last_letter];
+
+    return are_linked;
 }
 
 void add_used_word(string word)
