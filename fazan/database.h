@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-class Database
+class database
 {
 public:
     void add_used_word(std::string word);

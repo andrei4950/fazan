@@ -2,10 +2,10 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "Database.h"
-#include "Bot.h"
-#include "Lau_bot.h"
-#include "Tools.h"
+#include "database.h"
+#include "bot.h"
+#include "lau_bot.h"
+#include "tools.h"
 
 using namespace std;
 
@@ -30,23 +30,23 @@ public:
 };
 
 
-class Fazan_god:Bot
+class Fazan_god:bot
 {
 public:
-    virtual string get_reply(string last_word, Database db)
+    virtual string get_reply(string last_word, database db)
     {
         return 0;
     }
 };
 
 
-class Andy_bot:Bot
+class Andy_bot:bot
 {
 public:
-    Andy_bot(Database db) : Bot(db) {};
+    Andy_bot(database db) : bot(db) {};
     
 private:
-    vector<string> get_closing_words(Database db)
+    vector<string> get_closing_words(database db)
     {
         vector<string> all_words = db.get_all_words();
         vector<string> closing_words = {};
@@ -84,7 +84,7 @@ public:
         if(last_word.size()>1){
             for(int iter = 0; iter < closing_words.size(); iter ++)
             {
-                if(Tools::are_words_linked(last_word, closing_words[iter]) && !m_db.is_used(closing_words[iter]))
+                if(tools::are_words_linked(last_word, closing_words[iter]) && !m_db.is_used(closing_words[iter]))
                 {
                     response = closing_words[iter];
                     return response;
@@ -95,7 +95,7 @@ public:
         vector<string> all_words = m_db.get_all_words();
         for(int iter = 0; iter < all_words.size(); iter ++)
         {
-            if(Tools::are_words_linked(last_word, all_words[iter]) && !m_db.is_used(all_words[iter]))
+            if(tools::are_words_linked(last_word, all_words[iter]) && !m_db.is_used(all_words[iter]))
             {
                 response = all_words[iter];
                 return response;
@@ -122,9 +122,9 @@ class Core
         return player1_score>=5 || player2_score>=5;
     }
 
-    bool is_round_over(string last_word, string second_to_last_word, Database db)
+    bool is_round_over(string last_word, string second_to_last_word, database db)
     {
-        return !(Tools::are_words_linked(second_to_last_word, last_word)) || !(Database::is_real(last_word)) || db.is_used(last_word);
+        return !(tools::are_words_linked(second_to_last_word, last_word)) || !(database::is_real(last_word)) || db.is_used(last_word);
     }
     
 public:
@@ -136,9 +136,9 @@ public:
         string second_to_last_word;
         bool is_player_one_starting = rand() % 2;
         bool is_player_one_turn = is_player_one_starting;
-        Database db;
+        database db;
         Andy_bot player1(db);
-        Lau_bot player2(db);
+        lau_bot player2(db);
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
         
