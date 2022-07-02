@@ -209,7 +209,7 @@ public:
     virtual string get_reply(string last_word)
     {
         string response = get_response(last_word);
-        while ((!Database::is_real(response) ||  Tools::are_words_linked(last_word, response)) && response != "")
+        while((!Database::is_real(response) ||  !Tools::are_words_linked(last_word, response)) && response != "")
         {
             cout << "That word is not real or not linked! Try again, or leave empty. " << endl;
             response = get_response(last_word);
