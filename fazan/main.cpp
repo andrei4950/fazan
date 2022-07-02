@@ -36,17 +36,17 @@ public:
 
 class Database
 {
+    vector<string> used_words_db = {};
+    
 public:
-    static void add_used_word(string word)
+    void add_used_word(string word)
     {
-        ofstream used_words("used_words.txt");
-        used_words<<word<<'\n';
-        used_words.close();
+        used_words_db.push_back(word);
     }
 
-    static void reset_used_words()
+    void reset_used_words()
     {
-        
+        used_words_db = {};
     }
 
 private:
@@ -97,12 +97,13 @@ public:
         return content_vector;
     }
 
-    static vector<string> get_used_words()
+    vector<string> get_used_words()
     {
-        return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/used_words.txt");
+        vector<string> output = used_words_db;
+        return output;
     }
 
-    static bool is_used(string word)
+    bool is_used(string word)
     {
         transform(word.begin(), word.end(), word.begin(), :: toupper);
         vector<string> used_words = get_used_words();
@@ -170,14 +171,14 @@ public:
 class Bot
 {
 public:
-    virtual string get_reply(string last_word) = 0;
+    virtual string get_reply(string last_word, Database db) = 0;
 };
 
 
 class Fazan_god:Bot
 {
 public:
-    virtual string get_reply(string last_word)
+    virtual string get_reply(string last_word, Database db)
     {
         return 0;
     }
@@ -187,7 +188,7 @@ public:
 class Andy_bot:Bot
 {
 public:
-    virtual string get_reply(string last_word)
+    virtual string get_reply(string last_word, Database db)
     {
         return 0;
     }
@@ -206,12 +207,12 @@ class Human_bot:Bot
     }
     
 public:
-    virtual string get_reply(string last_word)
+    virtual string get_reply(string last_word, Database db)
     {
         string response = get_response(last_word);
-        while((!Database::is_real(response) ||  !Tools::are_words_linked(last_word, response)) && response != "")
+        while((!Database::is_real(response) || !Tools::are_words_linked(last_word, response) || db.is_used(response)) && response != "")
         {
-            cout << "That word is not real or not linked! Try again, or leave empty. " << endl;
+            cout << "That word is not real, already used or not linked! Try again, or leave empty. " << endl;
             response = get_response(last_word);
         }
         return response;
@@ -234,9 +235,9 @@ class Core
         return player1_score>=5 || player2_score>=5;
     }
 
-    bool is_round_over(string last_word, string second_to_last_word)
+    bool is_round_over(string last_word, string second_to_last_word, Database db)
     {
-        return !(Tools::are_words_linked(second_to_last_word, last_word)) || !(Database::is_real(last_word)) || Database::is_used(last_word);
+        return !(Tools::are_words_linked(second_to_last_word, last_word)) || !(Database::is_real(last_word)) || db.is_used(last_word);
     }
     
 public:
@@ -250,6 +251,7 @@ public:
         bool is_player_one_turn = is_player_one_starting;
         Human_bot player1;
         Human_bot player2;
+        Database db;
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
         
@@ -264,13 +266,13 @@ public:
                 if(is_player_one_turn)
                 {
                     second_to_last_word = last_word;
-                    last_word = player1.get_reply(last_word);
+                    last_word = player1.get_reply(last_word, db);
                     transform(last_word.begin(), last_word.end(), last_word.begin(), :: toupper);
                 }
                 else
                 {
                     second_to_last_word = last_word;
-                    last_word = player2.get_reply(last_word);
+                    last_word = player2.get_reply(last_word, db);
                     transform(last_word.begin(), last_word.end(), last_word.begin(), :: toupper);
                 }
                 
@@ -279,7 +281,7 @@ public:
                 
                 word_number++;
                 is_player_one_turn = !is_player_one_turn;
-            }while(!is_round_over(last_word, second_to_last_word));
+            }while(!is_round_over(last_word, second_to_last_word, db));
             
             if(word_number == 2)
             {
@@ -295,7 +297,7 @@ public:
                 else
                     player2_score++;
             }
-            
+            db.reset_used_words();
             Display::display_round_over(player1_score, player2_score);
         }
     }
