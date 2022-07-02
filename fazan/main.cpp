@@ -35,6 +35,11 @@ void add_used_word(string word)
     used_words.close();
 }
 
+void reset_used_words()
+{
+    
+}
+
 string get_file_content(string filename)
 {
     ifstream file;
