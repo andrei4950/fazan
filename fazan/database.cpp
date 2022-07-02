@@ -11,21 +11,22 @@
 #include <iostream>
 #include <fstream>
 
-#include "Database.h"
+#include "database.h"
+#include "settings.h"
 
 using namespace std;
 
-void Database::add_used_word(string word)
+void database::add_used_word(string word)
 {
     used_words_db.push_back(word);
 }
 
-void Database::reset_used_words()
+void database::reset_used_words()
 {
     used_words_db = {};
 }
 
-string Database::get_file_content(string filename)
+string database::get_file_content(string filename)
 {
     ifstream file;
     file.open(filename);
@@ -48,7 +49,7 @@ string Database::get_file_content(string filename)
     return content;
 }
 
-vector<string> Database::get_file_content_vector(string filename)
+vector<string> database::get_file_content_vector(string filename)
 {
     vector<string> content_vector = {};
     string content_string = get_file_content(filename);
@@ -71,13 +72,13 @@ vector<string> Database::get_file_content_vector(string filename)
     return content_vector;
 }
 
-vector<string> Database::get_used_words()
+vector<string> database::get_used_words()
 {
     vector<string> output = used_words_db;
     return output;
 }
 
-bool Database::is_used(string word)
+bool database::is_used(string word)
 {
     transform(word.begin(), word.end(), word.begin(), :: toupper);
     vector<string> used_words = get_used_words();
@@ -95,15 +96,15 @@ bool Database::is_used(string word)
     return ok;
 }
 
-vector<string> Database::get_all_words()
+vector<string> database::get_all_words()
 {
-    return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/list.txt");
+    return get_file_content_vector(settings::db_path);
 }
 
-bool Database::is_real(string word)
+bool database::is_real(string word)
 {
     transform(word.begin(), word.end(), word.begin(), :: toupper);
-    vector<string> all_words = Database::get_all_words();
+    vector<string> all_words = database::get_all_words();
     unsigned long len = all_words.size();
     bool ok = 0;
     

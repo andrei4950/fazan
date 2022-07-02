@@ -8,10 +8,10 @@
 #ifndef Lau_bot_h
 #define Lau_bot_h
 
-class Lau_bot : Bot
+class lau_bot : bot
 {
 public:
-    Lau_bot(Database db) : Bot(db) {};
+    lau_bot(database db) : bot(db) {};
     
 public:
     std::string get_reply(std::string last_word);

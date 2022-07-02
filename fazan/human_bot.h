@@ -9,12 +9,12 @@
 #define Human_bot_hpp
 
 #include <stdio.h>
-#include "Bot.h"
+#include "bot.h"
 
-class Human_bot : Bot
+class human_bot : bot
 {
 public:
-    Human_bot(Database db) : Bot(db) {};
+    human_bot(database db) : bot(db) {};
     
 public:
     std::string get_reply(std::string last_word);

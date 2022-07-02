@@ -5,11 +5,11 @@
 //  Created by Laurentiu Taropa on 02/07/2022.
 //
 
-#include "Tools.h"
+#include "tools.h"
 
 using namespace std;
 
-bool Tools::are_words_linked(string word1, string word2)
+bool tools::are_words_linked(string word1, string word2)
 {
     transform(word1.begin(), word1.end(), word1.begin(), :: toupper);
     transform(word2.begin(), word2.end(), word2.begin(), :: toupper);
