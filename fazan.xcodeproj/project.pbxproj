@@ -29,6 +29,9 @@
 		0D6C977E2870A6BC00215B51 /* Lau_bot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Lau_bot.cpp; sourceTree = "<group>"; };
 		0D6C97802870A75F00215B51 /* Bot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bot.cpp; sourceTree = "<group>"; };
 		0D6C97822870ACDE00215B51 /* Database.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Database.cpp; sourceTree = "<group>"; };
+		0D8A35512870DF9F007F6371 /* Lau_bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lau_bot.h; sourceTree = "<group>"; };
+		0D8A35522870DFBB007F6371 /* Bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bot.h; sourceTree = "<group>"; };
+		0D8A35532870DFCC007F6371 /* Database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		E1C6ED54286C7E1900119241 /* fazan */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fazan; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C6ED57286C7E1900119241 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E1C6ED60286CC7B800119241 /* list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = list.txt; sourceTree = "<group>"; };
@@ -71,6 +74,9 @@
 				0D6C977E2870A6BC00215B51 /* Lau_bot.cpp */,
 				0D6C97802870A75F00215B51 /* Bot.cpp */,
 				0D6C97822870ACDE00215B51 /* Database.cpp */,
+				0D8A35512870DF9F007F6371 /* Lau_bot.h */,
+				0D8A35522870DFBB007F6371 /* Bot.h */,
+				0D8A35532870DFCC007F6371 /* Database.h */,
 			);
 			path = fazan;
 			sourceTree = "<group>";
@@ -148,7 +154,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -206,7 +212,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;

@@ -6,23 +6,24 @@
 //
 
 #include <stdio.h>
-#include "Bot.cpp"
-#include "Database.cpp"
+#include "Bot.h"
+#include "Lau_bot.h"
+#include "Database.h"
 
 using namespace std;
 
-class Lau_bot : Bot
+string Lau_bot::get_reply(string last_word)
 {
-    string get_reply(string last_word)
+    if(last_word.length() >= 2)     // Valid word
     {
-        if(last_word.length() >= 2)     // Valid word
-        {
-            auto ending = last_word.substr(last_word.length() - 2);
-            auto words = Database::get_all_words();
-            auto it = find_if(words.begin(), words.end(), [&](const auto& x) { return x.strats_with(ending);});
-            if(it != words.end()) {
-                return *it;
-            }
-        }
+        auto ending = last_word.substr(last_word.length() - 2);
+//        vector<string> words = Database::get_all_words();
+//        auto it = find_if(words.begin(), words.end(), [&](const auto& x) { return x.starts_with(ending);});
+//        if(it != words.end()) {
+//            return *it;
+//        }
     }
-};
+    
+    return "";
+}
+

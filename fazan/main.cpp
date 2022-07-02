@@ -2,10 +2,9 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "Bot.cpp"
-#include "Lau_bot.cpp"
-#include "Database.cpp"
-
+#include "Database.h"
+#include "Bot.h"
+#include "Lau_bot.h"
 
 using namespace std;
 
@@ -186,9 +185,9 @@ public:
         string second_to_last_word;
         bool is_player_one_starting = rand() % 2;
         bool is_player_one_turn = is_player_one_starting;
-        Human_bot player1;
-        Human_bot player2;
         Database db;
+        Lau_bot player1(db);
+        Lau_bot player2(db);
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
         
@@ -203,13 +202,13 @@ public:
                 if(is_player_one_turn)
                 {
                     second_to_last_word = last_word;
-                    last_word = player1.get_reply(last_word, db);
+                    last_word = player1.get_reply(last_word);
                     transform(last_word.begin(), last_word.end(), last_word.begin(), :: toupper);
                 }
                 else
                 {
                     second_to_last_word = last_word;
-                    last_word = player2.get_reply(last_word, db);
+                    last_word = player2.get_reply(last_word);
                     transform(last_word.begin(), last_word.end(), last_word.begin(), :: toupper);
                 }
                 
