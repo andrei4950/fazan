@@ -219,8 +219,29 @@ class Andy_bot:Bot
 public:
     virtual string get_reply(string last_word)
     {
-        closing_words = get_closing_words(db)
-        return 0;
+        string response = "";
+        Database db;
+        vector<string> closing_words = get_closing_words(db);
+        for(int iter = 0; iter < closing_words.size(); iter ++)
+        {
+            if(Tools::are_words_linked(last_word, closing_words[iter]) && !db.is_used(closing_words[iter]))
+            {
+                response = closing_words[iter];
+                return response;
+            }
+        }
+        
+        vector<string> all_words = db.get_all_words();
+        for(int iter = 0; iter < all_words.size(); iter ++)
+        {
+            if(Tools::are_words_linked(last_word, all_words[iter]) && !db.is_used(all_words[iter]))
+            {
+                response = all_words[iter];
+                return response;
+            }
+        }
+        
+        return response;
     }
 };
 
@@ -334,6 +355,8 @@ public:
 
 int main()
 {
+    Andy_bot bot;
+    bot.get_reply("test");
     Core core;
     core.run_game();
     return 0;
