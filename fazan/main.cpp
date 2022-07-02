@@ -221,14 +221,15 @@ public:
     virtual string get_reply(string last_word, Database db)
     {
         string response = "";
-        Database db;
         vector<string> closing_words = get_closing_words(db);
-        for(int iter = 0; iter < closing_words.size(); iter ++)
-        {
-            if(Tools::are_words_linked(last_word, closing_words[iter]) && !db.is_used(closing_words[iter]))
+        if(last_word.size()>1){
+            for(int iter = 0; iter < closing_words.size(); iter ++)
             {
-                response = closing_words[iter];
-                return response;
+                if(Tools::are_words_linked(last_word, closing_words[iter]) && !db.is_used(closing_words[iter]))
+                {
+                    response = closing_words[iter];
+                    return response;
+                }
             }
         }
         
