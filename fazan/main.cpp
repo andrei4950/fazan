@@ -158,7 +158,7 @@ string get_response(string last_word)
     string response;
     cout << "Other player said " << last_word << endl;
     cout << "Your response: ";
-    cin >> response;
+    getline(cin, response);
     return response;
 }
 
@@ -205,27 +205,28 @@ void run_game()
     while(!is_game_over(player1_score, player2_score))
     {
         int word_number = 0;
-        char starting_letter = 'A' + (rand() % 26);
-        last_word[0] = starting_letter;
+        char starting_letter = (char)((int)'A' + (rand() % 26));
+        last_word += starting_letter;
         
-        while(!is_round_over(last_word, second_to_last_word))
+        do
         {
             if(is_player_one_turn)
             {
                 second_to_last_word = last_word;
-                last_word = bot1(last_word);
+                last_word = human_player(last_word);
             }
             else
             {
                 second_to_last_word = last_word;
-                last_word = bot2(last_word);
+                last_word = human_player(last_word);
             }
             
-            display_player_response(last_word, is_player_one_turn);
+            if(word_number>0)
+                display_player_response(last_word, is_player_one_turn);
             
             word_number++;
             is_player_one_turn = !is_player_one_turn;
-        }
+        }while(!is_round_over(last_word, second_to_last_word));
         
         if(word_number == 2)
         {
@@ -248,7 +249,7 @@ void run_game()
 
 int main()
 {
-    
+    run_game();
     return 0;
 }
 
