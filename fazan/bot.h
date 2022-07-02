@@ -8,14 +8,14 @@
 #ifndef Bot_h
 #define Bot_h
 
-#include "Database.h"
+#include "database.h"
 
-class Bot
+class bot
 {
 protected:
-    Database m_db;
+    database m_db;
 public:
-    Bot(Database db) : m_db(db) {};
+    bot(database db) : m_db(db) {};
 public:
     virtual std::string get_reply(std::string last_word) = 0;
 };

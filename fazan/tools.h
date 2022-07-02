@@ -11,7 +11,7 @@
 #include <string>
 #include <stdio.h>
 
-class Tools
+class tools
 {
 public:
     static bool are_words_linked(std::string word1, std::string word2);
