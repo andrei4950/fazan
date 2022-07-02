@@ -12,6 +12,7 @@
 		0D8A35562870FD6F007F6371 /* human_bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D8A35542870FD6F007F6371 /* human_bot.cpp */; };
 		0D8A35592870FEBF007F6371 /* tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D8A35572870FEBF007F6371 /* tools.cpp */; };
 		E1C6ED58286C7E1900119241 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1C6ED57286C7E1900119241 /* main.cpp */; };
+		E1D3DA8A2871029400F1EDBD /* Alex_bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1D3DA882871029400F1EDBD /* Alex_bot.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,8 @@
 		E1C6ED57286C7E1900119241 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E1C6ED60286CC7B800119241 /* list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = list.txt; sourceTree = "<group>"; };
 		E1C6ED61286CC85D00119241 /* used_words.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = used_words.txt; sourceTree = "<group>"; };
+		E1D3DA882871029400F1EDBD /* Alex_bot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Alex_bot.cpp; sourceTree = "<group>"; };
+		E1D3DA892871029400F1EDBD /* Alex_bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Alex_bot.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +79,8 @@
 				E1C6ED57286C7E1900119241 /* main.cpp */,
 				E1C6ED60286CC7B800119241 /* list.txt */,
 				E1C6ED61286CC85D00119241 /* used_words.txt */,
+				E1D3DA882871029400F1EDBD /* Alex_bot.cpp */,
+				E1D3DA892871029400F1EDBD /* Alex_bot.h */,
 				0D8A35512870DF9F007F6371 /* lau_bot.h */,
 				0D6C977E2870A6BC00215B51 /* lau_bot.cpp */,
 				0D8A35532870DFCC007F6371 /* database.h */,
@@ -148,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D6C977F2870A6BC00215B51 /* lau_bot.cpp in Sources */,
+				E1D3DA8A2871029400F1EDBD /* Alex_bot.cpp in Sources */,
 				0D6C97832870ACDE00215B51 /* database.cpp in Sources */,
 				0D8A35592870FEBF007F6371 /* tools.cpp in Sources */,
 				0D8A35562870FD6F007F6371 /* human_bot.cpp in Sources */,
