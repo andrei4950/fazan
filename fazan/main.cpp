@@ -355,8 +355,6 @@ public:
 
 int main()
 {
-    Andy_bot bot;
-    bot.get_reply("test");
     Core core;
     core.run_game();
     return 0;
