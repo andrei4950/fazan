@@ -135,7 +135,7 @@ public:
         string last_word;
         string second_to_last_word;
         bool is_player_one_starting = rand() % 2;
-        bool is_player_one_turn = is_player_one_starting;
+        bool is_player_one_turn;
         database db;
         Andy_bot player1(db);
         lau_bot player2(db);
@@ -145,9 +145,11 @@ public:
         while(!is_game_over(player1_score, player2_score))
         {
             int word_number = 0;
+            is_player_one_turn = is_player_one_starting;
+            
             char starting_letter = (char)((int)'A' + (rand() % 26));
             last_word += starting_letter;
-            
+                        
             do
             {
                 if(is_player_one_turn)
@@ -163,8 +165,7 @@ public:
                     transform(last_word.begin(), last_word.end(), last_word.begin(), :: toupper);
                 }
                 
-                if(word_number>0)
-                    Display::display_player_response(last_word, is_player_one_turn);
+                Display::display_player_response(last_word, is_player_one_turn);
                 
                 word_number++;
                 is_player_one_turn = !is_player_one_turn;
@@ -186,6 +187,7 @@ public:
             }
             db.reset_used_words();
             Display::display_round_over(player1_score, player2_score);
+            is_player_one_starting = !is_player_one_starting;
         }
     }
 };
