@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D6C977F2870A6BC00215B51 /* Lau_bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C977E2870A6BC00215B51 /* Lau_bot.cpp */; };
+		0D6C97812870A75F00215B51 /* Bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C97802870A75F00215B51 /* Bot.cpp */; };
+		0D6C97832870ACDE00215B51 /* Database.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C97822870ACDE00215B51 /* Database.cpp */; };
 		E1C6ED58286C7E1900119241 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1C6ED57286C7E1900119241 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +26,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D6C977E2870A6BC00215B51 /* Lau_bot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Lau_bot.cpp; sourceTree = "<group>"; };
+		0D6C97802870A75F00215B51 /* Bot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bot.cpp; sourceTree = "<group>"; };
+		0D6C97822870ACDE00215B51 /* Database.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Database.cpp; sourceTree = "<group>"; };
 		E1C6ED54286C7E1900119241 /* fazan */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fazan; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C6ED57286C7E1900119241 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E1C6ED60286CC7B800119241 /* list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = list.txt; sourceTree = "<group>"; };
@@ -62,6 +68,9 @@
 				E1C6ED57286C7E1900119241 /* main.cpp */,
 				E1C6ED60286CC7B800119241 /* list.txt */,
 				E1C6ED61286CC85D00119241 /* used_words.txt */,
+				0D6C977E2870A6BC00215B51 /* Lau_bot.cpp */,
+				0D6C97802870A75F00215B51 /* Bot.cpp */,
+				0D6C97822870ACDE00215B51 /* Database.cpp */,
 			);
 			path = fazan;
 			sourceTree = "<group>";
@@ -123,6 +132,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D6C97812870A75F00215B51 /* Bot.cpp in Sources */,
+				0D6C977F2870A6BC00215B51 /* Lau_bot.cpp in Sources */,
+				0D6C97832870ACDE00215B51 /* Database.cpp in Sources */,
 				E1C6ED58286C7E1900119241 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,7 +192,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -232,7 +244,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

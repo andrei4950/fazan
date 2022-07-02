@@ -2,6 +2,10 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "Bot.cpp"
+#include "Lau_bot.cpp"
+#include "Database.cpp"
+
 
 using namespace std;
 
@@ -34,119 +38,6 @@ public:
 };
 
 
-class Database
-{
-    vector<string> used_words_db = {};
-    
-public:
-    void add_used_word(string word)
-    {
-        used_words_db.push_back(word);
-    }
-
-    void reset_used_words()
-    {
-        used_words_db = {};
-    }
-
-private:
-    static string get_file_content(string filename)
-    {
-        ifstream file;
-        file.open(filename);
-        string content;
-        if ( file.is_open() )
-        {
-            string line;
-            while(getline(file, line))
-            {
-                content.append(line);
-                content.append(" ");
-            }
-            file.close();
-        }
-        else
-        {
-            cout<<"ERROR! File not found. "<<endl;
-            content = "";
-        }
-        return content;
-    }
-    
-public:
-    static vector<string> get_file_content_vector(string filename)
-    {
-        vector<string> content_vector = {};
-        string content_string = get_file_content(filename);
-        string word = "";
-        for (unsigned i=0; i<content_string.length(); ++i)
-        {
-            if(content_string.at(i) == ' ')
-            {
-                if(word != "")
-                {
-                    content_vector.push_back(word);
-                    word = "";
-                }
-            }
-            else
-            {
-                word += content_string.at(i);
-            }
-        }
-        return content_vector;
-    }
-
-    vector<string> get_used_words()
-    {
-        vector<string> output = used_words_db;
-        return output;
-    }
-
-    bool is_used(string word)
-    {
-        transform(word.begin(), word.end(), word.begin(), :: toupper);
-        vector<string> used_words = get_used_words();
-        unsigned long len = used_words.size();
-        bool ok = 0;
-        
-        for(int i=0; i<len; i++)
-        {
-            if(word == used_words[i])
-            {
-                ok = 1;
-                break;
-            }
-        }
-        return ok;
-    }
-
-    static vector<string> get_all_words()
-    {
-        return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/list.txt");
-    }
-
-    static bool is_real(string word)
-    {
-        transform(word.begin(), word.end(), word.begin(), :: toupper);
-        vector<string> all_words = get_all_words();
-        unsigned long len = all_words.size();
-        bool ok = 0;
-        
-        for(int i=0; i<len; i++)            //future improvements: binary search
-        {
-            if(word == all_words[i])
-            {
-                ok = 1;
-                break;
-            }
-        }
-        return ok;
-    }
-
-};
-
-
 class Display
 {
 public:
@@ -165,13 +56,6 @@ public:
         cout << "First player score is  " << score1 << endl;
         cout << "Second player score is " << score2 << endl;
     }
-};
-
-
-class Bot
-{
-public:
-    virtual string get_reply(string last_word, Database db) = 0;
 };
 
 
