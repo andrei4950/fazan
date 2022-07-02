@@ -15,17 +15,14 @@
 
 using namespace std;
 
-
 void Database::add_used_word(string word)
 {
-    ofstream used_words("used_words.txt");
-    used_words<<word<<'\n';
-    used_words.close();
+    used_words_db.push_back(word);
 }
 
 void Database::reset_used_words()
 {
-    
+    used_words_db = {};
 }
 
 string Database::get_file_content(string filename)
@@ -76,7 +73,8 @@ vector<string> Database::get_file_content_vector(string filename)
 
 vector<string> Database::get_used_words()
 {
-    return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/used_words.txt");
+    vector<string> output = used_words_db;
+    return output;
 }
 
 bool Database::is_used(string word)
@@ -102,7 +100,7 @@ vector<string> Database::get_all_words()
     return get_file_content_vector("/Users/andynic/c++ projects/fazan/fazan/list.txt");
 }
 
-bool is_real(string word)
+bool Database::is_real(string word)
 {
     transform(word.begin(), word.end(), word.begin(), :: toupper);
     vector<string> all_words = Database::get_all_words();

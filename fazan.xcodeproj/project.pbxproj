@@ -10,6 +10,8 @@
 		0D6C977F2870A6BC00215B51 /* Lau_bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C977E2870A6BC00215B51 /* Lau_bot.cpp */; };
 		0D6C97812870A75F00215B51 /* Bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C97802870A75F00215B51 /* Bot.cpp */; };
 		0D6C97832870ACDE00215B51 /* Database.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6C97822870ACDE00215B51 /* Database.cpp */; };
+		0D8A35562870FD6F007F6371 /* Human_bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D8A35542870FD6F007F6371 /* Human_bot.cpp */; };
+		0D8A35592870FEBF007F6371 /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D8A35572870FEBF007F6371 /* Tools.cpp */; };
 		E1C6ED58286C7E1900119241 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1C6ED57286C7E1900119241 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,10 @@
 		0D8A35512870DF9F007F6371 /* Lau_bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lau_bot.h; sourceTree = "<group>"; };
 		0D8A35522870DFBB007F6371 /* Bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bot.h; sourceTree = "<group>"; };
 		0D8A35532870DFCC007F6371 /* Database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		0D8A35542870FD6F007F6371 /* Human_bot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Human_bot.cpp; sourceTree = "<group>"; };
+		0D8A35552870FD6F007F6371 /* Human_bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Human_bot.h; sourceTree = "<group>"; };
+		0D8A35572870FEBF007F6371 /* Tools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tools.cpp; sourceTree = "<group>"; };
+		0D8A35582870FEBF007F6371 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		E1C6ED54286C7E1900119241 /* fazan */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fazan; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C6ED57286C7E1900119241 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E1C6ED60286CC7B800119241 /* list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = list.txt; sourceTree = "<group>"; };
@@ -71,12 +77,16 @@
 				E1C6ED57286C7E1900119241 /* main.cpp */,
 				E1C6ED60286CC7B800119241 /* list.txt */,
 				E1C6ED61286CC85D00119241 /* used_words.txt */,
-				0D6C977E2870A6BC00215B51 /* Lau_bot.cpp */,
-				0D6C97802870A75F00215B51 /* Bot.cpp */,
-				0D6C97822870ACDE00215B51 /* Database.cpp */,
 				0D8A35512870DF9F007F6371 /* Lau_bot.h */,
-				0D8A35522870DFBB007F6371 /* Bot.h */,
+				0D6C977E2870A6BC00215B51 /* Lau_bot.cpp */,
 				0D8A35532870DFCC007F6371 /* Database.h */,
+				0D6C97822870ACDE00215B51 /* Database.cpp */,
+				0D8A35522870DFBB007F6371 /* Bot.h */,
+				0D6C97802870A75F00215B51 /* Bot.cpp */,
+				0D8A35552870FD6F007F6371 /* Human_bot.h */,
+				0D8A35542870FD6F007F6371 /* Human_bot.cpp */,
+				0D8A35572870FEBF007F6371 /* Tools.cpp */,
+				0D8A35582870FEBF007F6371 /* Tools.h */,
 			);
 			path = fazan;
 			sourceTree = "<group>";
@@ -141,6 +151,8 @@
 				0D6C97812870A75F00215B51 /* Bot.cpp in Sources */,
 				0D6C977F2870A6BC00215B51 /* Lau_bot.cpp in Sources */,
 				0D6C97832870ACDE00215B51 /* Database.cpp in Sources */,
+				0D8A35592870FEBF007F6371 /* Tools.cpp in Sources */,
+				0D8A35562870FD6F007F6371 /* Human_bot.cpp in Sources */,
 				E1C6ED58286C7E1900119241 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

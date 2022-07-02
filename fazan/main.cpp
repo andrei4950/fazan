@@ -5,37 +5,9 @@
 #include "Database.h"
 #include "Bot.h"
 #include "Lau_bot.h"
+#include "Tools.h"
 
 using namespace std;
-
-
-class Tools
-{
-public:
-    static bool are_words_linked(string word1, string word2)
-    {
-        transform(word1.begin(), word1.end(), word1.begin(), :: toupper);
-        transform(word2.begin(), word2.end(), word2.begin(), :: toupper);
-        
-        bool are_linked;
-        if(word1.size() > 1 && word2.size() > 1)
-        {
-            are_linked = word2[0] == word1[word1.size()-2] && word2[1] == word1[word1.size()-1];
-        }
-        else
-        {
-            if(word1.size() == 0 || word2.size() < 2)
-                are_linked = 0;
-            else
-                if(word1.size() == 1)
-                    are_linked = word1[0] == word2[0];
-                else
-                    are_linked = 0;
-        }
-        return are_linked;
-    }
-};
-
 
 class Display
 {
@@ -70,6 +42,10 @@ public:
 
 class Andy_bot:Bot
 {
+public:
+    Andy_bot(Database db) : Bot(db) {};
+    
+private:
     vector<string> get_closing_words(Database db)
     {
         vector<string> all_words = db.get_all_words();
@@ -101,14 +77,14 @@ class Andy_bot:Bot
         return closing_words;
     }
 public:
-    virtual string get_reply(string last_word, Database db)
+    virtual string get_reply(string last_word)
     {
         string response = "";
-        vector<string> closing_words = get_closing_words(db);
+        vector<string> closing_words = get_closing_words(m_db);
         if(last_word.size()>1){
             for(int iter = 0; iter < closing_words.size(); iter ++)
             {
-                if(Tools::are_words_linked(last_word, closing_words[iter]) && !db.is_used(closing_words[iter]))
+                if(Tools::are_words_linked(last_word, closing_words[iter]) && !m_db.is_used(closing_words[iter]))
                 {
                     response = closing_words[iter];
                     return response;
@@ -116,41 +92,16 @@ public:
             }
         }
         
-        vector<string> all_words = db.get_all_words();
+        vector<string> all_words = m_db.get_all_words();
         for(int iter = 0; iter < all_words.size(); iter ++)
         {
-            if(Tools::are_words_linked(last_word, all_words[iter]) && !db.is_used(all_words[iter]))
+            if(Tools::are_words_linked(last_word, all_words[iter]) && !m_db.is_used(all_words[iter]))
             {
                 response = all_words[iter];
                 return response;
             }
         }
         
-        return response;
-    }
-};
-
-
-class Human_bot:Bot
-{
-    string get_response(string last_word)
-    {
-        string response;
-        cout << "Other player said " << last_word << endl;
-        cout << "Your response: ";
-        getline(cin, response);
-        return response;
-    }
-    
-public:
-    virtual string get_reply(string last_word, Database db)
-    {
-        string response = get_response(last_word);
-        while((!Database::is_real(response) || !Tools::are_words_linked(last_word, response) || db.is_used(response)) && response != "")
-        {
-            cout << "That word is not real, already used or not linked! Try again, or leave empty. " << endl;
-            response = get_response(last_word);
-        }
         return response;
     }
 };
@@ -186,7 +137,7 @@ public:
         bool is_player_one_starting = rand() % 2;
         bool is_player_one_turn = is_player_one_starting;
         Database db;
-        Lau_bot player1(db);
+        Andy_bot player1(db);
         Lau_bot player2(db);
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
