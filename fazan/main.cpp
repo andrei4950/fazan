@@ -186,9 +186,40 @@ public:
 
 class Andy_bot:Bot
 {
+    vector<string> get_closing_words(Database db)
+    {
+        vector<string> all_words = db.get_all_words();
+        vector<string> closing_words = {};
+        bool is_ending_closing[26][26];
+        
+        for(int i = 0; i < 26; i++)
+        {
+            for(int j = 0; j < 26; j++)
+            {
+                is_ending_closing[i][j] = 1;
+            }
+        }
+        
+        long int dictionary_size = all_words.size();
+        for(int iter = 0; iter < dictionary_size; iter ++)
+        {
+            is_ending_closing[all_words[iter][0]][all_words[iter][1]] = 0;
+        }
+        
+        for(int iter = 0; iter < dictionary_size; iter ++)
+        {
+            string word = all_words[iter];
+            if(is_ending_closing[word[word.size()-2]][word[word.size()-1]])
+            {
+                closing_words.push_back(word);
+            }
+        }
+        return closing_words;
+    }
 public:
     virtual string get_reply(string last_word)
     {
+        closing_words = get_closing_words(db)
         return 0;
     }
 };
