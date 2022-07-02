@@ -10,10 +10,10 @@
 
 #include <stdio.h>
 
-class Alex_bot : Bot
+class alex_bot : bot
 {
 public:
-    Alex_bot(Database db);
+    alex_bot(database db);
     
 public:
     std::string get_reply(std::string last_word);

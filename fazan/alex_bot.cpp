@@ -11,23 +11,23 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "Bot.h"
-#include "Tools.h"
-#include "Alex_bot.h"
+#include "bot.h"
+#include "tools.h"
+#include "alex_bot.h"
 
 using namespace std;
 
-Alex_bot::Alex_bot(Database db) : Bot(db)
+alex_bot::alex_bot(database db) : bot(db)
 {
     used_words = db.get_used_words();
 }
     
-void Alex_bot::add_future_use(string word)
+void alex_bot::add_future_use(string word)
 {
     used_words[used_words.size()] = word;
 }
     
-bool Alex_bot::will_be_used(string word)
+bool alex_bot::will_be_used(string word)
 {
     unsigned long len = used_words.size();
     for(int i = 0; i < len; i++)
@@ -38,9 +38,9 @@ bool Alex_bot::will_be_used(string word)
     return 0;
 }
     
-string Alex_bot::get_reply(string word)
+string alex_bot::get_reply(string word)
 {
-    vector<string> all_words = Database::get_all_words();
+    vector<string> all_words = database::get_all_words();
     unsigned long len = all_words.size();
     string reply = "";
     
@@ -53,9 +53,9 @@ string Alex_bot::get_reply(string word)
         do
         {
             pos++;
-        }while(pos<len || !Tools::are_words_linked(word, all_words[pos]));
+        }while(pos<len || !tools::are_words_linked(word, all_words[pos]));
         
-        while(Tools::are_words_linked(word, all_words[pos]) && pos < len)
+        while(tools::are_words_linked(word, all_words[pos]) && pos < len)
         {
             linked_words[i] = all_words[pos];
             i++;
@@ -67,7 +67,7 @@ string Alex_bot::get_reply(string word)
         
         for(i = 0; i < linked_len; i++)
         {
-            if(!Tools::are_words_linked(linked_words[i], get_reply(linked_words[i])))
+            if(!tools::are_words_linked(linked_words[i], get_reply(linked_words[i])))
             {
                 direct_win = 1;
                 reply = linked_words[i];
@@ -79,7 +79,7 @@ string Alex_bot::get_reply(string word)
         {
             for(i = 0; i < linked_len; i++)
             {
-                if(Tools::are_words_linked(get_reply(linked_words[i]), get_reply(get_reply(linked_words[i]))) && !will_be_used(linked_words[i]))
+                if(tools::are_words_linked(get_reply(linked_words[i]), get_reply(get_reply(linked_words[i]))) && !will_be_used(linked_words[i]))
                 {
                     reply = linked_words[i];
                     add_future_use(linked_words[i]);
@@ -100,9 +100,9 @@ string Alex_bot::get_reply(string word)
         do
         {
             pos++;
-        }while(pos < len || !Tools::are_words_linked(word, all_words[pos]));
+        }while(pos < len || !tools::are_words_linked(word, all_words[pos]));
         
-        while(Tools::are_words_linked(word, all_words[pos]) && pos < len)
+        while(tools::are_words_linked(word, all_words[pos]) && pos < len)
         {
             linked_words[i] = all_words[pos];
             i++;
@@ -112,7 +112,7 @@ string Alex_bot::get_reply(string word)
         unsigned long linked_len = i;
         for(i = 0; i < linked_len; i++)
         {
-            if(Tools::are_words_linked(get_reply(linked_words[i]), get_reply(get_reply(linked_words[i]))) && !will_be_used(linked_words[i]))
+            if(tools::are_words_linked(get_reply(linked_words[i]), get_reply(get_reply(linked_words[i]))) && !will_be_used(linked_words[i]))
             {
                 reply = linked_words[i];
                 add_future_use(linked_words[i]);
