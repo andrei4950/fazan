@@ -214,11 +214,13 @@ void run_game()
             {
                 second_to_last_word = last_word;
                 last_word = human_player(last_word);
+                transform(last_word.begin(), last_word.end(), last_word.begin(), :: toupper);
             }
             else
             {
                 second_to_last_word = last_word;
                 last_word = human_player(last_word);
+                transform(last_word.begin(), last_word.end(), last_word.begin(), :: toupper);
             }
             
             if(word_number>0)
