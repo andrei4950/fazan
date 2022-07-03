@@ -5,6 +5,7 @@
 #include "database.h"
 #include "bot.h"
 #include "lau_bot.h"
+#include "human_bot.h"
 #include "tools.h"
 
 using namespace std;
@@ -138,20 +139,25 @@ public:
         bool is_player_one_turn;
         database db;
         Andy_bot player1(db);
-        lau_bot player2(db);
+        human_bot player2(db);
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
         
         while(!is_game_over(player1_score, player2_score))
         {
+            //round starts
+            
             int word_number = 0;
             is_player_one_turn = is_player_one_starting;
-            
             char starting_letter = (char)((int)'A' + (rand() % 26));
             last_word += starting_letter;
                         
             do
             {
+                //turn starts
+                
+                db.add_used_word(last_word);
+                
                 if(is_player_one_turn)
                 {
                     second_to_last_word = last_word;
@@ -166,12 +172,14 @@ public:
                 }
                 
                 Display::display_player_response(last_word, is_player_one_turn);
-                
                 word_number++;
                 is_player_one_turn = !is_player_one_turn;
+                
+                //turn ends
+                
             }while(!is_round_over(last_word, second_to_last_word, db));
             
-            if(word_number == 2)
+            if(word_number == 2 && tools::is_closing(second_to_last_word, db.get_used_words()))  //when you immediately end
             {
                 if(is_player_one_turn)
                     player2_score++;
@@ -185,10 +193,14 @@ public:
                 else
                     player2_score++;
             }
-            db.reset_used_words();
             Display::display_round_over(player1_score, player2_score);
             is_player_one_starting = !is_player_one_starting;
+            
+            //round ends
+            
         }
+        db.reset_used_words();
+        //game ends
     }
 };
 
