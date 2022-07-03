@@ -5,11 +5,12 @@
 #include "database.h"
 #include "bot.h"
 #include "lau_bot.h"
+#include "Alex_bot.h"
 #include "tools.h"
 
 using namespace std;
 
-class Display
+class display
 {
 public:
     static void display_player_response(string word, bool is_player_one_turn)
@@ -138,7 +139,7 @@ public:
         bool is_player_one_turn = is_player_one_starting;
         database db;
         Andy_bot player1(db);
-        lau_bot player2(db);
+        alex_bot player2(db);
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
         
@@ -164,7 +165,7 @@ public:
                 }
                 
                 if(word_number>0)
-                    Display::display_player_response(last_word, is_player_one_turn);
+                    display::display_player_response(last_word, is_player_one_turn);
                 
                 word_number++;
                 is_player_one_turn = !is_player_one_turn;
@@ -185,7 +186,7 @@ public:
                     player2_score++;
             }
             db.reset_used_words();
-            Display::display_round_over(player1_score, player2_score);
+            display::display_round_over(player1_score, player2_score);
         }
     }
 };
