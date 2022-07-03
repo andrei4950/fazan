@@ -41,9 +41,13 @@ bool tools::is_closing(string word, vector<string> used_words)
     vector<string> difference;
     set_difference(all_words.begin(), all_words.end(), used_words.begin(), used_words.end(), back_inserter(difference));
     
+    bool out = 1;
     unsigned long len = difference.size();
         for(int i = 0; i < len; i++)
             if(tools::are_words_linked(word, difference[i]))
-                return 1;
-        return 0;
+            {
+                out = 0;
+                break;
+            }
+        return out;
 }
