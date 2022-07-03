@@ -20,27 +20,20 @@ using namespace std;
 alex_bot::alex_bot(database db) : bot(db)
 {
     used_words = db.get_used_words();
+    all_words = db.get_all_words();
 }
     
-void alex_bot::add_future_use(string word)
+bool alex_bot::is_direct_win(string word)
 {
-    used_words[used_words.size()] = word;
-}
-    
-bool alex_bot::will_be_used(string word)
-{
-    unsigned long len = used_words.size();
+    unsigned long len = all_words.size();
     for(int i = 0; i < len; i++)
-    {
-        if(used_words[i] == word)
+        if(tools::are_words_linked(word, all_words[i]))
             return 1;
-    }
     return 0;
 }
-    
+   
 string alex_bot::get_reply(string word)
 {
-    vector<string> all_words = database::get_all_words();
     unsigned long len = all_words.size();
     string reply = "";
     
@@ -48,12 +41,12 @@ string alex_bot::get_reply(string word)
     {
         vector<string> linked_words;
         vector<string> temp_used_words = used_words;
-        unsigned long pos = -1, i = 0;
+        unsigned long pos = 0, i = 0;
         
         do
         {
             pos++;
-        }while(pos<len || !tools::are_words_linked(word, all_words[pos]));
+        }while(pos < len - 2 || !tools::are_words_linked(word, all_words[pos]));
         
         while(tools::are_words_linked(word, all_words[pos]) && pos < len)
         {
@@ -67,7 +60,7 @@ string alex_bot::get_reply(string word)
         
         for(i = 0; i < linked_len; i++)
         {
-            if(!tools::are_words_linked(linked_words[i], get_reply(linked_words[i])))
+            if(is_direct_win(linked_words[i]))
             {
                 direct_win = 1;
                 reply = linked_words[i];
@@ -79,17 +72,13 @@ string alex_bot::get_reply(string word)
         {
             for(i = 0; i < linked_len; i++)
             {
-                if(tools::are_words_linked(get_reply(linked_words[i]), get_reply(get_reply(linked_words[i]))) && !will_be_used(linked_words[i]))
+                if(!is_direct_win(get_reply(linked_words[i])))
                 {
                     reply = linked_words[i];
-                    add_future_use(linked_words[i]);
                     break;
                 }
             }
         }
-        
-        used_words = temp_used_words;
-        add_future_use(reply);
     }
     else
     {
@@ -112,16 +101,12 @@ string alex_bot::get_reply(string word)
         unsigned long linked_len = i;
         for(i = 0; i < linked_len; i++)
         {
-            if(tools::are_words_linked(get_reply(linked_words[i]), get_reply(get_reply(linked_words[i]))) && !will_be_used(linked_words[i]))
+            if(!is_direct_win(get_reply(linked_words[i])))
             {
                 reply = linked_words[i];
-                add_future_use(linked_words[i]);
                 break;
             }
         }
-        
-        used_words = temp_used_words;
-        add_future_use(reply);
     }
     
     return reply;

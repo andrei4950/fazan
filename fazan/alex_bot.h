@@ -19,11 +19,14 @@ public:
     std::string get_reply(std::string last_word);
     
 private:
-    void add_future_use(std::string word);
-    bool will_be_used(std::string word);
+    std::vector<std::string> used_words;
     
 private:
-    std::vector<std::string> used_words;
+    std::vector<std::string> all_words;
+    
+private:
+    bool is_direct_win(std::string word);
+    
 };
 
 
