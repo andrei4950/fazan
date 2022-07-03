@@ -64,15 +64,23 @@ private:
         long int dictionary_size = all_words.size();
         for(int iter = 0; iter < dictionary_size; iter ++)
         {
-            is_ending_closing[all_words[iter][0]][all_words[iter][1]] = 0;
+            if (all_words[iter].size()>1)
+            {
+                int first_letter = all_words[iter][0] - 'A';
+                int second_letter = all_words[iter][1] - 'A';
+                is_ending_closing[first_letter][second_letter] = 0;
+            }
         }
         
         for(int iter = 0; iter < dictionary_size; iter ++)
         {
             string word = all_words[iter];
-            if(is_ending_closing[word[word.size()-2]][word[word.size()-1]])
+            if (word.size()>1)
             {
-                closing_words.push_back(word);
+                if(is_ending_closing[word[word.size()-2]-'A'][word[word.size()-1]-'A'])
+                {
+                    closing_words.push_back(word);
+                }
             }
         }
         return closing_words;
