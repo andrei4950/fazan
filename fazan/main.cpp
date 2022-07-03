@@ -5,6 +5,7 @@
 #include "database.h"
 #include "bot.h"
 #include "lau_bot.h"
+#include "human_bot.h"
 #include "tools.h"
 
 using namespace std;
@@ -63,15 +64,23 @@ private:
         long int dictionary_size = all_words.size();
         for(int iter = 0; iter < dictionary_size; iter ++)
         {
-            is_ending_closing[all_words[iter][0]][all_words[iter][1]] = 0;
+            if (all_words[iter].size()>1)
+            {
+                int first_letter = all_words[iter][0] - 'A';
+                int second_letter = all_words[iter][1] - 'A';
+                is_ending_closing[first_letter][second_letter] = 0;
+            }
         }
         
         for(int iter = 0; iter < dictionary_size; iter ++)
         {
             string word = all_words[iter];
-            if(is_ending_closing[word[word.size()-2]][word[word.size()-1]])
+            if (word.size()>1)
             {
-                closing_words.push_back(word);
+                if(is_ending_closing[word[word.size()-2]-'A'][word[word.size()-1]-'A'])
+                {
+                    closing_words.push_back(word);
+                }
             }
         }
         return closing_words;
@@ -138,20 +147,25 @@ public:
         bool is_player_one_turn;
         database db;
         Andy_bot player1(db);
-        lau_bot player2(db);
+        human_bot player2(db);
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
         
         while(!is_game_over(player1_score, player2_score))
         {
+            //round starts
+            
             int word_number = 0;
             is_player_one_turn = is_player_one_starting;
-            
             char starting_letter = (char)((int)'A' + (rand() % 26));
             last_word += starting_letter;
                         
             do
             {
+                //turn starts
+                
+                db.add_used_word(last_word);
+                
                 if(is_player_one_turn)
                 {
                     second_to_last_word = last_word;
@@ -166,12 +180,14 @@ public:
                 }
                 
                 Display::display_player_response(last_word, is_player_one_turn);
-                
                 word_number++;
                 is_player_one_turn = !is_player_one_turn;
+                
+                //turn ends
+                
             }while(!is_round_over(last_word, second_to_last_word, db));
             
-            if(word_number == 2)
+            if(word_number == 2 && tools::is_closing(second_to_last_word, db.get_used_words()))  //when you immediately end
             {
                 if(is_player_one_turn)
                     player2_score++;
@@ -185,10 +201,14 @@ public:
                 else
                     player2_score++;
             }
-            db.reset_used_words();
             Display::display_round_over(player1_score, player2_score);
             is_player_one_starting = !is_player_one_starting;
+            
+            //round ends
+            
         }
+        db.reset_used_words();
+        //game ends
     }
 };
 
