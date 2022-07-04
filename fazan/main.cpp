@@ -7,6 +7,7 @@
 #include "lau_bot.h"
 #include "Alex_bot.h"
 #include "human_bot.h"
+#include "boss_bot.h"
 #include "tools.h"
 
 using namespace std;
