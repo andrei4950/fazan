@@ -19,6 +19,7 @@ using namespace std;
 void database::add_used_word(string word)
 {
     used_words_db.push_back(word);
+    sort(used_words_db.begin(), used_words_db.end());
 }
 
 void database::reset_used_words()
@@ -84,6 +85,7 @@ vector<string> database::get_file_content_vector(string filename)
             word += content_string.at(i);
         }
     }
+    sort(content_vector.begin(), content_vector.end());
     return content_vector;
 }
 

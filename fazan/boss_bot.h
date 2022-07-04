@@ -24,7 +24,10 @@ public:
 private:
     static vector<vector<long int>> base_link_level(vector<string> dictionary);
     static vector<vector<long int>> word_scores(vector<string> dictionary, vector<vector<long int>> link_level);
-
+    vector<string> get_best_words(int min, string last_word);
+    
+private:
+    vector<vector<long int>> ws;
 };
 
 #endif /* boss_bot_h */

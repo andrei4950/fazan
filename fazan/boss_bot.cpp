@@ -17,23 +17,8 @@ boss_bot::boss_bot(database db) : bot(db)
 {
     vector<string> all_words = m_db.get_all_words();
     vector<vector<long int>> bll = base_link_level(all_words);
-    for(int i = 0; i < bll.size(); i++){
-        for(int j = 0; j < bll[i].size(); j++)
-        {
-            cout<<bll[i][j]<<" ";
-        }
-        cout<<"\n";
-    }
     
-    vector<vector<long int>> ws = word_scores(all_words, bll);
-    cout<<"word scores: "<<"\n";
-    for(int i = 0; i < ws.size(); i++){
-        for(int j = 0; j < ws[i].size(); j++)
-        {
-            cout<<ws[i][j]<<" ";
-        }
-        cout<<"\n";
-    }
+    ws = word_scores(all_words, bll);
 }
 
 vector<string> get_closing_words(database db)
@@ -73,6 +58,35 @@ vector<string> get_closing_words(database db)
         }
     }
     return closing_words;
+}
+
+vector<string> boss_bot::get_best_words(int min, string last_word)
+{
+    vector<string> all_words = m_db.get_all_words();
+    vector<string> used_words = m_db.get_used_words();
+    
+    vector<string> available_words;
+    set_difference(all_words.begin(), all_words.end(), used_words.begin(), used_words.end(), back_inserter(available_words));
+    
+    vector<string> best_words;
+    long int dictionary_size = available_words.size();
+    while(best_words.size() == 0 && min <= 1000)
+    {
+        cout<<min<<"\n";
+        for(int iter = 0; iter < dictionary_size; iter ++)
+        {
+            string word = available_words[iter];
+            if (word.size()>1)
+            {
+                if(ws[word[word.size()-2]-'A'][word[word.size()-1]-'A'] == min && tools::are_words_linked(last_word, word))
+                {
+                    best_words.push_back(word);
+                }
+            }
+        }
+        min++;
+    }
+    return best_words;
 }
 
 vector<vector<long int>> boss_bot::base_link_level(vector<string> dictionary)
@@ -119,7 +133,7 @@ vector<vector<long int>> boss_bot::word_scores(vector<string> dictionary, vector
         if (word.size()>1)
         {
             if (link_level[word[word.size()-2] - 'A'][word[word.size()-1]-'A'] == 0)
-                word_scores[word[0] - 'A'][word[1] - 'A'] = 1000000;
+                word_scores[word[0] - 'A'][word[1] - 'A'] = 1000;
         }
     }
     return word_scores;
@@ -127,28 +141,13 @@ vector<vector<long int>> boss_bot::word_scores(vector<string> dictionary, vector
 
 string boss_bot::get_reply(string last_word)
 {
-    string response = "";
-    vector<string> closing_words = get_closing_words(m_db);
     if(last_word.size()>1){
-        for(int iter = 0; iter < closing_words.size(); iter ++)
-        {
-            if(tools::are_words_linked(last_word, closing_words[iter]) && !m_db.is_used(closing_words[iter]))
-            {
-                response = closing_words[iter];
-                return response;
-            }
-        }
+        vector<string> best_words = get_best_words(0, last_word);
+        return best_words[0];
     }
-    
-    vector<string> all_words = m_db.get_all_words();
-    for(int iter = 0; iter < all_words.size(); iter ++)
+    else
     {
-        if(tools::are_words_linked(last_word, all_words[iter]) && !m_db.is_used(all_words[iter]))
-        {
-            response = all_words[iter];
-            return response;
-        }
+        vector<string> best_words = get_best_words(1, last_word);
+        return best_words[0];
     }
-    
-    return response;
 }
