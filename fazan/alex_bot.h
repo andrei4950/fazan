@@ -22,8 +22,12 @@ private:
     std::vector<std::string> used_words;
     
 private:
+    bool closers[26][26] = {0};
     std::vector<std::string> all_words;
-    
+private:
+    std::string direct_closer(std::string word, std::vector<std::string>);
+    std::string no_closer(std::string word, std::vector<std::string>);
+    std::vector<std::string> get_links(std::string word);
 private:
     bool is_direct_win(std::string word);
     
