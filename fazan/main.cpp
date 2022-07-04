@@ -149,7 +149,7 @@ public:
         bool is_player_one_turn;
         database db;
         Andy_bot player1(db);
-        alex_bot player2(db);
+        boss_bot player2(db);
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
         
