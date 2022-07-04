@@ -31,6 +31,7 @@ public:
     static bool is_real(std::string word);
 private:
     std::vector<std::string> used_words_db = {};
+    static bool uses_normal_letters(std::string word);
 };
 
 #endif /* Database_h */

@@ -24,6 +24,16 @@ boss_bot::boss_bot(database db) : bot(db)
         }
         cout<<"\n";
     }
+    
+    vector<vector<long int>> ws = word_scores(all_words, bll);
+    cout<<"word scores: "<<"\n";
+    for(int i = 0; i < ws.size(); i++){
+        for(int j = 0; j < ws[i].size(); j++)
+        {
+            cout<<ws[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
 }
 
 vector<string> get_closing_words(database db)
@@ -68,7 +78,6 @@ vector<string> get_closing_words(database db)
 vector<vector<long int>> boss_bot::base_link_level(vector<string> dictionary)
 {
     vector<vector<long int>> base_link_level;
-    
     for(int i = 0; i < 26; i++)
     {
         base_link_level.push_back({});
@@ -89,6 +98,31 @@ vector<vector<long int>> boss_bot::base_link_level(vector<string> dictionary)
         }
     }
     return base_link_level;
+}
+
+vector<vector<long int>> boss_bot::word_scores(vector<string> dictionary, vector<vector<long int>> link_level)
+{
+    vector<vector<long int>> word_scores;
+    for(int i = 0; i < 26; i++)
+    {
+        word_scores.push_back({});
+        for(int j = 0; j < 26; j++)
+        {
+            word_scores[i].push_back({link_level[i][j]});
+        }
+    }
+    
+    long int dictionary_size = dictionary.size();
+    for(int iter = 0; iter < dictionary_size; iter ++)
+    {
+        string word = dictionary[iter];
+        if (word.size()>1)
+        {
+            if (link_level[word[word.size()-2] - 'A'][word[word.size()-1]-'A'] == 0)
+                word_scores[word[0] - 'A'][word[1] - 'A'] = 1000000;
+        }
+    }
+    return word_scores;
 }
 
 string boss_bot::get_reply(string last_word)

@@ -23,6 +23,8 @@ public:
     
 private:
     static vector<vector<long int>> base_link_level(vector<string> dictionary);
+    static vector<vector<long int>> word_scores(vector<string> dictionary, vector<vector<long int>> link_level);
+
 };
 
 #endif /* boss_bot_h */
