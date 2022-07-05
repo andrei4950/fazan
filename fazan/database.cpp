@@ -19,6 +19,7 @@ using namespace std;
 void database::add_used_word(string word)
 {
     used_words_db.push_back(word);
+    sort(used_words_db.begin(), used_words_db.end());
 }
 
 void database::reset_used_words()
@@ -49,6 +50,18 @@ string database::get_file_content(string filename)
     return content;
 }
 
+bool database::uses_normal_letters(std::string word)
+{
+    bool is_normal = 1;
+    int size = word.size();
+    for(int i = 0; i < size; i++)
+    {
+        if(word[i]<'A' || word[i]>'A'+26)
+            is_normal = 0;
+    }
+    return is_normal;
+}
+
 vector<string> database::get_file_content_vector(string filename)
 {
     vector<string> content_vector = {};
@@ -58,17 +71,21 @@ vector<string> database::get_file_content_vector(string filename)
     {
         if(content_string.at(i) == ' ')
         {
-            if(word != "")
+            if(word != "" && database::uses_normal_letters(word))
             {
+                transform(word.begin(), word.end(), word.begin(), :: toupper);
                 content_vector.push_back(word);
                 word = "";
             }
+            else
+                word = "";
         }
         else
         {
             word += content_string.at(i);
         }
     }
+    sort(content_vector.begin(), content_vector.end());
     return content_vector;
 }
 

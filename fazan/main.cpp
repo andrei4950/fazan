@@ -7,6 +7,7 @@
 #include "lau_bot.h"
 #include "Alex_bot.h"
 #include "human_bot.h"
+#include "boss_bot.h"
 #include "tools.h"
 
 using namespace std;
@@ -148,7 +149,7 @@ public:
         bool is_player_one_turn;
         database db;
         Andy_bot player1(db);
-        alex_bot player2(db);
+        boss_bot player2(db);
 
         setup_game(player1_score, player2_score, last_word, second_to_last_word);
         

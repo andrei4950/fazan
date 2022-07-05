@@ -13,6 +13,7 @@
 		0D8A35592870FEBF007F6371 /* tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D8A35572870FEBF007F6371 /* tools.cpp */; };
 		E1C6ED58286C7E1900119241 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1C6ED57286C7E1900119241 /* main.cpp */; };
 		E1D3DA8A2871029400F1EDBD /* alex_bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1D3DA882871029400F1EDBD /* alex_bot.cpp */; };
+		E1EA2C5E2872FCA100B9CE3B /* boss_bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1EA2C5D2872FCA100B9CE3B /* boss_bot.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +45,8 @@
 		E1C6ED61286CC85D00119241 /* used_words.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = used_words.txt; sourceTree = "<group>"; };
 		E1D3DA882871029400F1EDBD /* alex_bot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = alex_bot.cpp; sourceTree = "<group>"; };
 		E1D3DA892871029400F1EDBD /* alex_bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = alex_bot.h; sourceTree = "<group>"; };
+		E1EA2C5C2872FC8A00B9CE3B /* boss_bot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = boss_bot.h; sourceTree = "<group>"; };
+		E1EA2C5D2872FCA100B9CE3B /* boss_bot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = boss_bot.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 				0D8A35572870FEBF007F6371 /* tools.cpp */,
 				0D8A35582870FEBF007F6371 /* tools.h */,
 				0D8A355B287102C0007F6371 /* settings.h */,
+				E1EA2C5C2872FC8A00B9CE3B /* boss_bot.h */,
+				E1EA2C5D2872FCA100B9CE3B /* boss_bot.cpp */,
 			);
 			path = fazan;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 				0D8A35592870FEBF007F6371 /* tools.cpp in Sources */,
 				0D8A35562870FD6F007F6371 /* human_bot.cpp in Sources */,
 				E1C6ED58286C7E1900119241 /* main.cpp in Sources */,
+				E1EA2C5E2872FCA100B9CE3B /* boss_bot.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

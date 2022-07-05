@@ -15,7 +15,7 @@ class bot
 protected:
     database m_db;
 public:
-    bot(database db) : m_db(db) {};
+    bot(database db) {m_db = db;};
 public:
     virtual std::string get_reply(std::string last_word) = 0;
 };
